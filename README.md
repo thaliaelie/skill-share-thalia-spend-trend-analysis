@@ -43,5 +43,4 @@ Automates weekly enterprise clientele account spend analysis. Replicates my deci
       ├── SKILL.md
       ├── spend_trend_runner.py
       ├── .env.example
-      └── playbook/
-          └── lessons_learned.md
+    
