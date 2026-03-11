@@ -1,1 +1,14 @@
-info
+# Never commit secrets                                                                                                                                                                                            
+  .env                                                                                                                                                                                                              
+  *.env           
+
+  # macOS
+  .DS_Store
+
+  # Python
+  __pycache__/
+  *.pyc
+  *.pyo
+
+  # Output files (these live in your local clients folder, not the repo)
+  spend-trend-overview/
