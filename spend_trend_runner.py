@@ -14,6 +14,7 @@ For each client:
 """
 
 import json
+import os
 import smtplib
 import sys
 import urllib.request
@@ -25,22 +26,23 @@ from email.mime.text import MIMEText
 from pathlib import Path
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
+# Set these to your local paths, or override via environment variables.
 
-CLIENTS_DIR = Path("/Users/thaliaelie/clients")
-ENV_FILE = CLIENTS_DIR / "fam-foundational-files" / ".env"
-OVERVIEW_DIR = CLIENTS_DIR / "spend-trend-overview"
+CLIENTS_DIR  = Path(os.environ.get("CLIENTS_DIR",  Path.home() / "clients"))
+OVERVIEW_DIR = Path(os.environ.get("OVERVIEW_DIR", CLIENTS_DIR / "spend-trend-overview"))
+ENV_FILE     = Path(os.environ.get("ENV_FILE",     Path(__file__).parent / ".env"))
+
 CLOUDZERO_BASE = "https://api.cloudzero.com"
 
 # ── Clients ───────────────────────────────────────────────────────────────────
+# Add one entry per CloudZero customer.
+#   folder   — subfolder name under CLIENTS_DIR (lowercase, no spaces)
+#   env_key  — key name in .env that holds this client's CloudZero API key
+#   name     — display name used in reports
 
 CLIENTS = [
-    {"folder": "teradata",  "env_key": "TERADATA_API_KEY",  "name": "Teradata"},
-    {"folder": "cloudera",  "env_key": "CLOUDERA_API_KEY",  "name": "Cloudera"},
-    {"folder": "ncr-voyix", "env_key": "NCRV_API_KEY",      "name": "NCR Voyix"},
-    {"folder": "nextgen",   "env_key": "NEXTGEN_API_KEY",   "name": "NextGen"},
-    {"folder": "premier",   "env_key": "PREMIER_API_KEY",   "name": "Premier"},
-    {"folder": "sandboxaq", "env_key": "SANDBOXAQ_API_KEY", "name": "SandboxAQ"},
-    {"folder": "signifyd",  "env_key": "SIGNIFYD_API_KEY",  "name": "Signifyd"},
+    {"folder": "client-a", "env_key": "CLIENT_A_API_KEY", "name": "Client A"},
+    # {"folder": "client-b", "env_key": "CLIENT_B_API_KEY", "name": "Client B"},
 ]
 
 # ── Env reader ────────────────────────────────────────────────────────────────
